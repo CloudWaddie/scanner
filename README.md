@@ -1,5 +1,5 @@
 # simple scanner
-[![Made by Human](https://madebyhuman.iamjarl.com/badges/made-white.svg)](https://madebyhuman.iamjarl.com)
+[![Crafted by Human](https://madebyhuman.iamjarl.com/badges/crafted-white.svg)](https://madebyhuman.iamjarl.com)
 
 a go based scanner that uses regex to scan github for stuff.
 
