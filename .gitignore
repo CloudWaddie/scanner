@@ -1,3 +1,4 @@
 config.toml
 scanner.log
 out.exe
+go.sum
