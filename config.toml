@@ -1,0 +1,3 @@
+[signatures]
+"Local Test Trigger" = '(?i)flag_match_[a-z0-9]{6}'
+"Dummy Private Key"  = '-----BEGIN TEST PRIVATE KEY-----'

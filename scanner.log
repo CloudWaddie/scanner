@@ -1,0 +1,6 @@
+2026/05/28 17:46:25 Loaded config:
+2026/05/28 17:46:25   - dummy private key: -----BEGIN TEST PRIVATE KEY-----
+2026/05/28 17:46:25   - local test trigger: (?i)flag_match_[a-z0-9]{6}
+2026/05/28 17:46:25 Successfully loaded 2 rules!
+2026/05/28 17:46:25 Started 100 parallel scanning workers.
+2026/05/28 17:46:25 Unexpected status code fetching events: 403
