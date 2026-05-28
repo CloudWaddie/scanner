@@ -111,7 +111,7 @@ func main() {
 			req, _ := http.NewRequest("GET", url, nil)
 			req.Header.Set("User-Agent", "scanner")
 			if cfg.GitHubToken != "" {
-				req.Header.Set("Authorization", "Bearer"+cfg.GitHubToken)
+				req.Header.Set("Authorization", "Bearer "+cfg.GitHubToken)
 			}
 			if lastETag != "" {
 				req.Header.Add("If-None-Match", lastETag)
@@ -220,7 +220,7 @@ func worker(id int, p *tea.Program, jobs <-chan ScanJob, rules []Rule, cfg Confi
 		req.Header.Set("User-Agent", "scanner")
 		req.Header.Set("Accept", "application/vnd.github.v3.diff")
 		if cfg.GitHubToken != "" {
-			req.Header.Set("Authorization", "Bearer"+cfg.GitHubToken)
+			req.Header.Set("Authorization", "Bearer "+cfg.GitHubToken)
 		}
 
 		resp, err := client.Do(req)
