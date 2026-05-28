@@ -12,3 +12,13 @@ example config:
 "Private ECSDA Key"  = '-----BEGIN EC PRIVATE KEY-----'
 "Private Ed25519 Key"  = '-----BEGIN ED25519 PRIVATE KEY-----'
 ```
+
+run with:
+```
+go run main.go
+```
+
+or build:
+```
+go build -o out.exe main.go
+```
