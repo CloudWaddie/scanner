@@ -17,7 +17,8 @@ import (
 )
 
 type Config struct {
-	Signatures map[string]string `mapstructure:"signatures"`
+	GitHubToken string            `mapstructure:"github_token"`
+	Signatures  map[string]string `mapstructure:"signatures"`
 }
 
 type Rule struct {
@@ -91,7 +92,7 @@ func main() {
 	p := tea.NewProgram(initialModel)
 
 	for w := 1; w <= numWorkers; w++ {
-		go worker(w, p, jobs, rules)
+		go worker(w, p, jobs, rules, cfg)
 	}
 	log.Printf("Started %d parallel scanning workers.\n", numWorkers)
 
@@ -109,6 +110,9 @@ func main() {
 			p.Send(MsgStatusUpdate{Status: "Fetching events..."})
 			req, _ := http.NewRequest("GET", url, nil)
 			req.Header.Set("User-Agent", "scanner")
+			if cfg.GitHubToken != "" {
+				req.Header.Set("Authorization", "Bearer"+cfg.GitHubToken)
+			}
 			if lastETag != "" {
 				req.Header.Add("If-None-Match", lastETag)
 			}
@@ -202,7 +206,7 @@ func main() {
 	}
 }
 
-func worker(id int, p *tea.Program, jobs <-chan ScanJob, rules []Rule) {
+func worker(id int, p *tea.Program, jobs <-chan ScanJob, rules []Rule, cfg Config) {
 	client := &http.Client{
 		Timeout: 30 * time.Second,
 	}
@@ -215,6 +219,9 @@ func worker(id int, p *tea.Program, jobs <-chan ScanJob, rules []Rule) {
 		}
 		req.Header.Set("User-Agent", "scanner")
 		req.Header.Set("Accept", "application/vnd.github.v3.diff")
+		if cfg.GitHubToken != "" {
+			req.Header.Set("Authorization", "Bearer"+cfg.GitHubToken)
+		}
 
 		resp, err := client.Do(req)
 		if err != nil {
